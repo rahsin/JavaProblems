@@ -62,12 +62,17 @@ public class LinkedList {
 			return ;
 		}
 		
+		prev_node = n ;
 		
 		while(n != null && n.data != data){
 			prev_node = n ;
 			n = n.next ;
 		}
 		
+		prev_node.next = n.next ;
+		
+		if(n == null)
+			return ;
 	}
 
 	public static void main(String[] args) {
@@ -76,6 +81,8 @@ public class LinkedList {
 		list.push(2);
 		list.append(3);
 		list.insertAt(list.head.next, 4);
+		list.printList();
+		list.delete(4);
 		list.printList();
 	}
 
