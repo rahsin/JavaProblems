@@ -2,6 +2,15 @@ package com.java.algo;
 
 public class LinkedList {
 	Node head;
+	private int size = 0;
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
 
 	class Node {
 		int data;
@@ -18,6 +27,7 @@ public class LinkedList {
 		Node new_data = new Node(data);
 		new_data.next = head;
 		head = new_data;
+		size++;
 	}
 
 	public void insertAt(Node prev_node, int data) {
@@ -29,7 +39,7 @@ public class LinkedList {
 		Node new_node = new Node(data);
 		new_node.next = prev_node.next;
 		prev_node.next = new_node;
-
+		size++;
 	}
 
 	public void append(int data) {
@@ -41,6 +51,7 @@ public class LinkedList {
 		}
 
 		n.next = new_node;
+		size++;
 	}
 
 	public void printList() {
@@ -51,39 +62,80 @@ public class LinkedList {
 		}
 		System.out.println("NULL");
 	}
-	
-	public void delete(int data){
-		
-		Node prev_node = null ;
-		Node n = head ;
-		
-		if(n != null && n.data == data){
-			head = n.next ;
-			return ;
+
+	public void delete(int data) {
+
+		Node prev_node = null;
+		Node n = head;
+
+		if (n != null && n.data == data) {
+			head = n.next;
+			size--;
+			return;
 		}
-		
-		prev_node = n ;
-		
-		while(n != null && n.data != data){
-			prev_node = n ;
-			n = n.next ;
+
+		prev_node = n;
+
+		while (n != null && n.data != data) {
+			prev_node = n;
+			n = n.next;
 		}
-		
-		prev_node.next = n.next ;
-		
-		if(n == null)
-			return ;
+
+		if(prev_node.next != null){
+			prev_node.next = n.next;
+			size--;
+		}else{
+			System.out.println("Key not found : " + data);
+		}
+
+		if (n == null){
+			return;
+		}
+	}
+
+	public void deleteAt(int index) {
+
+		int count = 0;
+		if (index < 0 || index > size) {
+			System.out.println("Index not found");
+			return;
+		}
+
+		Node n = head;
+		Node prev_node = null;
+
+		if (index == 0) {
+			head = n.next;
+			size--;
+			return;
+		}
+
+		while (count != index) {
+			prev_node = n;
+			n = n.next;
+			count++;
+		}
+
+		prev_node.next = n.next;
+		size--;
 	}
 
 	public static void main(String[] args) {
 		LinkedList list = new LinkedList();
 		list.push(1);
 		list.push(2);
+		list.push(5);
+		list.push(1);
 		list.append(3);
 		list.insertAt(list.head.next, 4);
+		System.out.println(list.getSize());
 		list.printList();
-		list.delete(4);
+		list.delete(1);
 		list.printList();
+		System.out.println(list.getSize());
+		list.deleteAt(1);
+		list.printList();
+		System.out.println(list.getSize());
 	}
 
 }
