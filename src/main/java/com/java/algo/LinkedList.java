@@ -1,16 +1,9 @@
 package com.java.algo;
 
 public class LinkedList {
-	Node head;
+
+	 Node head;
 	private int size = 0;
-
-	public int getSize() {
-		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
-	}
 
 	class Node {
 		int data;
@@ -81,14 +74,14 @@ public class LinkedList {
 			n = n.next;
 		}
 
-		if(prev_node.next != null){
+		if (prev_node.next != null) {
 			prev_node.next = n.next;
 			size--;
-		}else{
+		} else {
 			System.out.println("Key not found : " + data);
 		}
 
-		if (n == null){
+		if (n == null) {
 			return;
 		}
 	}
@@ -115,27 +108,96 @@ public class LinkedList {
 			n = n.next;
 			count++;
 		}
-
 		prev_node.next = n.next;
 		size--;
 	}
 
+	
+
+	public int getSize() {
+		
+		Node n = head ;
+		int count = 0 ;
+		while(n != null){
+			n = n.next;
+			count++;
+		}
+		return count;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+	
+	public void swapData(int x , int y){
+		Node x1 = head;
+		Node y1  = head;
+		boolean hasX = false ;
+		boolean hasY = false ;
+		
+		
+		while(x1 != null && x1.data != x){
+			x1 = x1.next;
+		}
+		
+		if(x1 != null){
+			hasX = true ;
+		}
+		
+		while(y1 != null && y1.data != y){
+			y1 = y1.next;
+		}
+		
+		if(y1 != null){
+			hasY = true ;
+		}
+		
+		if(hasX && hasY){
+			x1.data = y ;
+			y1.data =x ;
+		}else{
+			System.out.println("Swapping data not in the list");
+		}
+	}
+	
+	Node reverse(Node node) {
+        Node prev = null;
+        Node current = node;
+        Node next = null;
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        node = prev;
+        return node;
+    }
+	
 	public static void main(String[] args) {
-		LinkedList list = new LinkedList();
+		/*LinkedList list = new LinkedList();
 		list.push(1);
 		list.push(2);
 		list.push(5);
-		list.push(1);
+		list.push(6);
 		list.append(3);
 		list.insertAt(list.head.next, 4);
 		System.out.println(list.getSize());
+		
 		list.printList();
-		list.delete(1);
+		list.swapData(4, 1);
+		list.printList();*/
+		/*list.delete(1);
 		list.printList();
 		System.out.println(list.getSize());
+		
 		list.deleteAt(1);
 		list.printList();
-		System.out.println(list.getSize());
+		System.out.println(list.getSize());*/
+		
+		
+        
+		
 	}
 
 }
